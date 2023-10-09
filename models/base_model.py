@@ -7,11 +7,20 @@ from datetime import datetime
 class BaseModel:
     """This is the Base class for all the packages"""
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """This is the instantiation phase"""
-        self.id = str(uuid4())
-        self.created_at = datetime.now()  # sets a creatioj time
-        self.updated_at = datetime.now()  # sets a creation time as well
+        if kwargs:
+            for key, value in kwargs.items():
+                if key is '__class__':
+                    continue
+                if key is 'created_at' or key is 'updated_at':
+                    setattr(self, key, datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f"))
+                else:
+                    setattr(self, key, value)
+        else:
+            self.id = str(uuid4())
+            self.created_at = datetime.now()  # sets a creatioj time
+            self.updated_at = datetime.now()  # sets a creation time as well
 
     def save(self):
         """This updates updated_at with the current datetime"""
