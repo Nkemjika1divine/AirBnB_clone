@@ -11,10 +11,14 @@ class BaseModel:
         """This is the instantiation phase"""
         if kwargs:
             for key, value in kwargs.items():
-                if key is '__class__':
+                if key == '__class__':
                     continue
-                if key is 'created_at' or key is 'updated_at':
-                    setattr(self, key, datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f"))
+                if key == 'created_at' or key == 'updated_at':
+                    setattr(
+                        self,
+                        key,
+                        datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                    )
                 else:
                     setattr(self, key, value)
         else:
