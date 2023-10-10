@@ -24,7 +24,8 @@ class FileStorage:
         """This serializes or enters object to the json file"""
         obj = {}  # empty doctionary
         for key, value in FileStorage.__objects.items():
-            obj[key] = value.to_dict()
+            if isinstance(value, BaseModel):
+                obj[key] = value.to_dict()
 
         with open(FileStorage.__file_path, "w") as f:
             json.dump(obj, f)
