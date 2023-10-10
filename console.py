@@ -25,6 +25,10 @@ class HBNBCommand(cmd.Cmd):
         """Print a custom help message when "help quit" is entered"""
         print("Quit command to exit the program\n")
 
+    def do_create(self, arg):
+        """This is used to create an instance of BaseModel"""
+
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
