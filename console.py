@@ -33,7 +33,6 @@ class HBNBCommand(cmd.Cmd):
 
         try:
             obj = arg.split()[0]  # store the first arg inobj
-            print(obj)
             instance = eval(obj)()  # evaluate & create instance of the class
             instance.save()  # call the save method on the created instance
             print(instance.id)  # print its id
