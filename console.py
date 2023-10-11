@@ -39,6 +39,22 @@ class HBNBCommand(cmd.Cmd):
         except (NameError, AttributeError):
             print("** class doesn't exist **")
 
+    def do_show(self, arg):
+        """This activates the show command
+        it shows the dictionary reoresentation of the object"""
+        if not arg:
+            print("** class name missing **")
+            return
+        
+        class_and_id = arg.split()
+        if len(class_and_id) > 2:
+            print("** instance id missing **")
+            return
+
+        class_var = class_and_id[0]
+        id_var = class_and_id[1]
+
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
