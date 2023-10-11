@@ -48,5 +48,13 @@ class BaseModel:
     def __str__(self):
         """This is a string representation of the basemodel class"""
         return "[{}] ({}) {}".format(
-            self.__class__.__name__, self.id, self.__dict__
+            self.__class__.__name__,
+            self.id,
+            {
+                'my_number': self.my_number,
+                'name': self.name,
+                'updated_at': self.updated_at,
+                'id': self.id,
+                'created_at': self.created_at
+            }
         )
