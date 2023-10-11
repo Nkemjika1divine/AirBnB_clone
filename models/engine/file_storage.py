@@ -16,10 +16,11 @@ class FileStorage:
 
     def new(self, obj):
         """Sets in __objects the obj value with class.id"""
-        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        self.all().update({obj.to_dict()['__class__'] + '.' + obj.id: obj})
+        # key = "{}.{}".format(obj.__class__.__name__, obj.id)
         # for obj.id, we assumr that he object passed to this method has an id
         # whether it is an object of BaseModel or another class
-        FileStorage.__objects[key] = key  # assign it to the key pair of dict
+        # FileStorage.__objects[key] = key  # assign it to the key pair of dict
 
     def save(self):
         """This serializes or enters object to the json file"""
