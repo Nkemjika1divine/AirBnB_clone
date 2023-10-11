@@ -2,7 +2,6 @@
 """This module houses the BaseModel class"""
 from uuid import uuid4
 from datetime import datetime
-from models import storage
 
 
 class BaseModel:
@@ -10,6 +9,7 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """This is the instantiation phase"""
+        from models.__init__ import storage
         if kwargs:
             for key, value in kwargs.items():
                 if key == '__class__':
@@ -30,6 +30,7 @@ class BaseModel:
 
     def save(self):
         """This updates updated_at with the current datetime"""
+        from models.__init__ import storage
         self.updated_at = datetime.now()  # Updates the new time
         storage.save()
 
