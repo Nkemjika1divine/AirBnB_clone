@@ -27,7 +27,8 @@ class FileStorage:
             obj = {}  # empty doctionary
             obj.update(FileStorage.__objects)
             for key, value in obj.items():
-                obj[key] = value.to_dict()
+                if isinstance(value, BaseModel):
+                    obj[key] = value.to_dict()
             json.dump(obj, f)
 
     def reload(self):
