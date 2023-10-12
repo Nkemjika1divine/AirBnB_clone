@@ -50,11 +50,5 @@ class BaseModel:
         return "[{}] ({}) {}".format(
             self.__class__.__name__,
             self.id,
-            {
-                'my_number': self.my_number,
-                'name': self.name,
-                'updated_at': self.updated_at,
-                'id': self.id,
-                'created_at': self.created_at
-            }
+            self.__dict__
         )

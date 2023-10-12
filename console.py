@@ -2,6 +2,7 @@
 """Tgis is the entry point of the AirBnB console. The console proper"""
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
+from models import storage
 import cmd
 
 
@@ -52,12 +53,18 @@ class HBNBCommand(cmd.Cmd):
             return
 
         class_var = class_and_id[0]
-        if class_var 
+        id_var = class_and_id[1]
+
+        everything = storage.all()
+        class_list = []
+        for i in everything:
+            class_name = i.split(".")[0]
+            class_list.append(class_name)
+        if class_var not in class_list:
             print("** class doesn't exist **")
             return
-        id_var = class_and_id[1]
+
         clsname_id = "{}.{}".format(class_var, id_var)
-        everything = self.storage.all()
         if clsname_id not in everything:
             print("** no instance found **")
             return
