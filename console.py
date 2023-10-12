@@ -79,10 +79,8 @@ class HBNBCommand(cmd.Cmd):
             return
 
         class_and_id = arg.split()
-        try:
+        if len(class_and_id) < 2:
             class_var = class_and_id[0]
-            id_var = class_and_id[1]
-
             everything = storage.all()
             class_list = []
             for i in everything:
@@ -91,18 +89,19 @@ class HBNBCommand(cmd.Cmd):
             if class_var not in class_list:
                 print("** class doesn't exist **")
                 return
-        except Exception as E:
             print("** instance id missing **")
             return
+        else:
+            class_var = class_and_id[0]
+            id_var = class_and_id[1]
+            everything = storage.all()
+            clsname_id = "{}.{}".format(class_var, id_var)
+            if clsname_id not in everything:
+                print("** no instance found **")
+                return
 
-        clsname_id = "{}.{}".format(class_var, id_var)
-        if clsname_id not in everything:
-            print("** no instance found **")
-            return
-
-        del(everything[clsname_id])
-        FileStorage.__objects = everything
-        FileStorage.save()
+        del storage.all()[clsname_id]
+        storage.save()
 
 
 
