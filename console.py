@@ -93,12 +93,7 @@ class HBNBCommand(cmd.Cmd):
         class_and_id = arg.split()
         if len(class_and_id) < 2:
             class_var = class_and_id[0]
-            everything = storage.all()
-            class_list = []
-            for i in everything:
-                class_name = i.split(".")[0]
-                class_list.append(class_name)
-            if class_var not in class_list:
+            if class_var not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
             print("** instance id missing **")
