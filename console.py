@@ -52,8 +52,17 @@ class HBNBCommand(cmd.Cmd):
             return
 
         class_var = class_and_id[0]
+        if class_var 
+            print("** class doesn't exist **")
+            return
         id_var = class_and_id[1]
+        clsname_id = "{}.{}".format(class_var, id_var)
+        everything = self.storage.all()
+        if clsname_id not in everything:
+            print("** no instance found **")
+            return
 
+        print(everything[clsname_id])
 
 
 if __name__ == '__main__':
