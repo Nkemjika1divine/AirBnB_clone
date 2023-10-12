@@ -9,6 +9,10 @@ import cmd
 class HBNBCommand(cmd.Cmd):
     """This is the console"""
     prompt = "(hbnb) "
+    classes = {
+            "BaseModel": BaseModel,
+            "FileStorage": FileStorage
+            }
 
     def do_quit(self, arg):
         """this exits the console"""
@@ -26,6 +30,10 @@ class HBNBCommand(cmd.Cmd):
         """Print a custom help message when "help quit" is entered"""
         print("Quit command to exit the program\n")
 
+    def help_EOF(self):
+        """Custom message that shows what EOF does"""
+        print("EOF exits the console")
+
     def do_create(self, arg):
         """This is used to create an instance of BaseModel"""
         if not arg:
@@ -39,6 +47,10 @@ class HBNBCommand(cmd.Cmd):
             print(instance.id)  # print its id
         except (NameError, AttributeError):
             print("** class doesn't exist **")
+
+    def help_create(self):
+        """This explains what the create command does"""
+        print("enter [create <class name>] to create an instance of the class")
 
     def do_show(self, arg):
         """This activates the show command
@@ -102,6 +114,28 @@ class HBNBCommand(cmd.Cmd):
 
         del storage.all()[clsname_id]
         storage.save()
+
+    def do_all(self, arg):
+        """This activates the all command
+        it shows all instances, or all instances of a class"""
+        everything = storage.all()
+        if not arg:
+            print_val = []
+            for key, value in everything.items():
+                print_val.append("{}".format(value))
+            print(print_val)
+            return
+
+        class_name = arg.split()[0]
+        if class_name not in HBNBCommand.classes:
+            print("** class doesn't exist **")
+            return
+
+        print_val = []
+        for key, value in everything.items():
+            if class_name == key.split(".")[0]:
+                print_val.append("{}".format(value))
+        print(print_val)
 
 
 
