@@ -48,20 +48,51 @@ class HBNBCommand(cmd.Cmd):
             return
         
         class_and_id = arg.split()
-        if len(class_and_id) > 2:
+        if len(class_and_id) < 2:
+            class_var = class_and_id[0]
+
+            everything = storage.all()
+            class_list = []
+            for i in everything:
+                class_name = i.split(".")[0]
+                class_list.append(class_name)
+            if class_var not in class_list:
+                print("** class doesn't exist **")
+                return
             print("** instance id missing **")
             return
+        else:
+            class_var = class_and_id[0]
+            id_var = class_and_id[1]
+            clsname_id = "{}.{}".format(class_var, id_var)
+            everything = storage.all()
+            if clsname_id not in everything:
+                print("** no instance found **")
+                return
 
-        class_var = class_and_id[0]
-        id_var = class_and_id[1]
+        print(everything[clsname_id])
+    
+    def do_destroy(self, arg):
+        """This deletes an instance of an object"""
+        if not arg:
+            print("** class name missing **")
+            return
 
-        everything = storage.all()
-        class_list = []
-        for i in everything:
-            class_name = i.split(".")[0]
-            class_list.append(class_name)
-        if class_var not in class_list:
-            print("** class doesn't exist **")
+        class_and_id = arg.split()
+        try:
+            class_var = class_and_id[0]
+            id_var = class_and_id[1]
+
+            everything = storage.all()
+            class_list = []
+            for i in everything:
+                class_name = i.split(".")[0]
+                class_list.append(class_name)
+            if class_var not in class_list:
+                print("** class doesn't exist **")
+                return
+        except Exception as E:
+            print("** instance id missing **")
             return
 
         clsname_id = "{}.{}".format(class_var, id_var)
@@ -69,7 +100,10 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
             return
 
-        print(everything[clsname_id])
+        del(everything[clsname_id])
+        FileStorage.__objects = everything
+        FileStorage.save()
+
 
 
 if __name__ == '__main__':
