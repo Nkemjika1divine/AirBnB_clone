@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 """Tgis is the entry point of the AirBnB console. The console proper"""
+import cmd
+from models import storage
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
-from models import storage
-import cmd
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -11,7 +12,8 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     classes = {
             "BaseModel": BaseModel,
-            "FileStorage": FileStorage
+            "FileStorage": FileStorage,
+            "User": User
             }
 
     def do_quit(self, arg):
