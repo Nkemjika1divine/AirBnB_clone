@@ -70,7 +70,7 @@ class HBNBCommand(cmd.Cmd):
         if not arg:
             print("** class name missing **")
             return
-        
+
         class_and_id = arg.split()
         if len(class_and_id) < 2:
             class_var = class_and_id[0]
@@ -89,7 +89,7 @@ class HBNBCommand(cmd.Cmd):
                 return
 
         print(everything[clsname_id])
-    
+
     def do_destroy(self, arg):
         """This deletes an instance of an object"""
         if not arg:
@@ -137,7 +137,6 @@ class HBNBCommand(cmd.Cmd):
             if class_name == key.split(".")[0]:
                 print_val.append("{}".format(value))
         print(print_val)
-
 
 
 if __name__ == '__main__':
