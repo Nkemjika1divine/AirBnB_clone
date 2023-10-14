@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Tgis is the entry point of the AirBnB console. The console proper"""
+"""This is the entry point of the AirBnB console. The console proper"""
 import cmd
 from models import storage
 from models.amenity import Amenity
@@ -39,7 +39,7 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def help_quit(self):
-        """Print a custom help message when "help quit" is entered"""
+        """Prints a custom help message when "help quit" is entered"""
         print("Quit command to exit the program\n")
 
     def help_EOF(self):
@@ -66,7 +66,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, arg):
         """This activates the show command
-        it shows the dictionary reoresentation of the object"""
+        it shows the dictionary representation of the object"""
         if not arg:
             print("** class name missing **")
             return
