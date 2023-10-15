@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """This is the entry point of the AirBnB console. The console proper"""
 import cmd
+import sys
 from models import storage
 from models.amenity import Amenity
 from models.base_model import BaseModel
