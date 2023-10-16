@@ -139,6 +139,34 @@ class HBNBCommand(cmd.Cmd):
                 print_val.append("{}".format(value))
         print(print_val)
 
+    def precmd(self, line):
+        """This method executes the method-call commands"""
+        """commands = line.split()
+        breakdown = commands[0].split(".")
+        if breakdown[0] in HBNBCommand.classes and breakdown[1] == "all()":
+            everything = storage.all()
+            print_val = []
+            for key, value in everything.items():
+                if commands[0] == key.split(".")[0]:
+                    print_val.append("{}".format(value))
+            print(print_val)
+        return line"""
+        if line.endswith("()"):
+            try:
+                method_name = line.split(".")[0]
+                if method_name in HBNBCommand.classes:
+                    class_instance = HBNBCommand.classes[method_name]()
+                    everything = storage.all()
+                    val = []
+                    val = [str(a) for a in everything.values() if isinstance(a,
+                        class_instance.__class__)]
+                    print(val)
+            except Exception as E:
+                pass
+            finally:
+                return line
+        return line
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
