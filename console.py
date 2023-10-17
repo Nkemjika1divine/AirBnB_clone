@@ -152,6 +152,14 @@ class HBNBCommand(cmd.Cmd):
                     val = [str(a) for a in everything.values() if isinstance(a,
                         class_instance.__class__)]
                     print(val)
+                elif class_name in HBNBCommand.classes and method_name == "count()":
+                    class_instance = HBNBCommand.classes[class_name]()
+                    everything = storage.all()
+                    count = 0
+                    for a in everything.values():
+                        if isinstance(a, class_instance.__class__):
+                            count += 1
+                    print(count)
             except Exception as E:
                 pass
             finally:
